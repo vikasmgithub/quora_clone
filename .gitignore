@@ -50,3 +50,6 @@ fabric.properties
 .idea/modules.xml
 .idea/quora_clone.iml
 .idea/vcs.xml
+
+# DATABASE
+db.sqlite3
