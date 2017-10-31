@@ -14,8 +14,17 @@ Including another URLconf
     2. Add a URL to urlpatterns:  url(r'^blog/', include('blog.urls'))
 """
 from django.conf.urls import url
+from django.conf.urls import url,include
 from django.contrib import admin
+
+from quora_clone.views import Home,register
+from django.contrib.auth import views as auth_views
+
 
 urlpatterns = [
     url(r'^admin/', admin.site.urls),
+    url(r'^$',Home.as_view(),name = 'home'),
+    url('^', include('django.contrib.auth.urls')),
+    url(r'^register/$', register ,name='register'),
+    url(r'^logout/$', auth_views.logout,name='logout'),
 ]
