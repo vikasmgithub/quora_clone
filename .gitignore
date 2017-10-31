@@ -1,112 +1,52 @@
-# Editor
-.idea
+# User-specific stuff:
+.idea/**/workspace.xml
+.idea/**/tasks.xml
+.idea/dictionaries
 
-# Created by https://www.gitignore.io/api/python
+# Sensitive or high-churn files:
+.idea/**/dataSources/
+.idea/**/dataSources.ids
+.idea/**/dataSources.xml
+.idea/**/dataSources.local.xml
+.idea/**/sqlDataSources.xml
+.idea/**/dynamic.xml
+.idea/**/uiDesigner.xml
 
-### Python ###
-# Byte-compiled / optimized / DLL files
-__pycache__/
-*.py[cod]
-*$py.class
+# Gradle:
+.idea/**/gradle.xml
+.idea/**/libraries
 
-# C extensions
-*.so
+# CMake
+cmake-build-debug/
 
-# Distribution / packaging
-.Python
-build/
-develop-eggs/
-dist/
-downloads/
-eggs/
-.eggs/
-lib/
-lib64/
-parts/
-sdist/
-var/
-wheels/
-*.egg-info/
-.installed.cfg
-*.egg
+# Mongo Explorer plugin:
+.idea/**/mongoSettings.xml
 
-# PyInstaller
-#  Usually these files are written by a python script from a template
-#  before PyInstaller builds the exe, so as to inject date/other infos into it.
-*.manifest
-*.spec
+## File-based project format:
+*.iws
 
-# Installer logs
-pip-log.txt
-pip-delete-this-directory.txt
+## Plugin-specific files:
 
-# Unit test / coverage reports
-htmlcov/
-.tox/
-.coverage
-.coverage.*
-.cache
-nosetests.xml
-coverage.xml
-*.cover
-.hypothesis/
+# IntelliJ
+out/
 
-# Translations
-*.mo
-*.pot
+# mpeltonen/sbt-idea plugin
+.idea_modules/
 
-# Django stuff:
-*.log
-local_settings.py
+# JIRA plugin
+atlassian-ide-plugin.xml
 
-# Flask stuff:
-instance/
-.webassets-cache
+# Cursive Clojure plugin
+.idea/replstate.xml
 
-# Scrapy stuff:
-.scrapy
+# Crashlytics plugin (for Android Studio and IntelliJ)
+com_crashlytics_export_strings.xml
+crashlytics.properties
+crashlytics-build.properties
+fabric.properties
 
-# Sphinx documentation
-docs/_build/
-
-# PyBuilder
-target/
-
-# Jupyter Notebook
-.ipynb_checkpoints
-
-# pyenv
-.python-version
-
-# celery beat schedule file
-celerybeat-schedule
-
-# SageMath parsed files
-*.sage.py
-
-# Environments
-.env
-.venv
-env/
-venv/
-ENV/
-env.bak/
-venv.bak/
-
-# Spyder project settings
-.spyderproject
-.spyproject
-
-# Rope project settings
-.ropeproject
-
-# mkdocs documentation
-/site
-
-# mypy
-.mypy_cache/
-
-# End of https://www.gitignore.io/api/python
-
-# DATABASE
-db.sqlite3
+.idea/inspectionProfiles/
+.idea/misc.xml
+.idea/modules.xml
+.idea/quora_clone.iml
+.idea/vcs.xml
