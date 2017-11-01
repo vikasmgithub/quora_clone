@@ -1,0 +1,10 @@
+{% extends 'layout.html' %}
+
+{% block title %}
+    Successfully logged out || {{ block.super }}
+{% endblock %}
+
+{% block content %}
+    <p>Come back soon</p>
+    <a href="{% url 'user:login' %}">Login</a>
+{% endblock %}

@@ -17,8 +17,10 @@ from django.conf.urls import url, include
 from django.contrib import admin
 
 from questions import urls as question_url
+from users import urls as user_url
 
 urlpatterns = [
     url(r'^admin/', admin.site.urls),
-    url(r'^question/', include(question_url, namespace='question'))
+    url(r'^question/', include(question_url, namespace='question')),
+    url(r'^user/', include(user_url, namespace='user')),
 ]
