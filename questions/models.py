@@ -14,7 +14,7 @@ TAGS = (
 class Question(models.Model):
     asked_by = models.ForeignKey(User)
     title = models.CharField(max_length=80)
-    content = models.CharField(max_length=500, null=True, blank=True)
+    content = models.TextField(max_length=500, null=True, blank=True)
     tag = models.IntegerField(choices=TAGS)
     slug = AutoSlugField(populate_from='title', unique=True)
     asked_at = models.DateTimeField(auto_now_add=True)

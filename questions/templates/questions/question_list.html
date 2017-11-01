@@ -1,0 +1,23 @@
+{% extends 'layout.html' %}
+
+{% block title %}
+    Questions asked by you
+{% endblock %}
+
+{% block content %}
+    <div class="col-md-8">
+    <ul class="list-group">
+        {% for question in object_list %}
+            <li class="list-group-item">
+                <a href="{% url 'question:detail' slug=question.slug%}">{{ question.title }}</a>
+                <a href="{% url 'question:edit' slug=question.slug%}">
+                <i class="glyphicon glyphicon-pencil"></i>
+                </a>
+                <div class="pull-right">
+                    {{ question.asked_at| date}}
+                </div>
+            </li>
+        {% endfor %}
+    </ul>
+    </div>
+{% endblock %}
