@@ -5,6 +5,7 @@ from django.contrib.auth import views as auth_views
 from . import views
 
 urlpatterns = [
+    url(r'^feed/$', views.UserFeed.as_view(), name='feed'),
     url(r'^login/$', auth_views.login, {'template_name':'users/login.html'}, name='login'),
     url(r'^logout/$', auth_views.logout,
         {'template_name':'users/logged_out.html'} ,name='logout'),

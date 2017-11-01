@@ -17,7 +17,7 @@ class QuestionDetail(LoginRequiredMixin, DetailView):
     template_name = 'questions/question_detail.html'
 
     def get_queryset(self):
-        return models.Question.objects.filter(asked_by=self.request.user)
+        return models.Question.objects.all()
 
 
 class AskQuestion(LoginRequiredMixin, CreateView):
