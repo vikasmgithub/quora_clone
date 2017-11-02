@@ -1,0 +1,12 @@
+{% extends 'layout.html' %}
+{% load bootstrap3 %}
+
+{% block content %}
+    <div class="col-md-4">
+    <form action="" method="post">
+        {% csrf_token %}
+        {% bootstrap_form form %}
+        {% buttons submit="Ask" %}{% endbuttons %}
+    </form>
+    </div>
+{% endblock %}
