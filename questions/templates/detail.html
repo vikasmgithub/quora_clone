@@ -1,0 +1,14 @@
+{% extends "base.html" %}
+
+{% block title %}
+    Questions asked by you
+{% endblock %}
+
+
+{% block content %}
+    <div>
+        {{ object.title }}
+    {{ object.content }}
+    </div>
+    <a href="{% url 'question:update' slug=question.slug %}">edit</a>
+{% endblock content %}

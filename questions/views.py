@@ -1,7 +1,8 @@
 from django.views.generic.list import ListView
 from django.views.generic.detail import DetailView
-from django.views.generic.edit import CreateView
+from django.views.generic.edit import CreateView,UpdateView
 from .models import Question
+from django.http import Http404
 from django.core.urlresolvers import reverse_lazy
 
 
@@ -15,10 +16,22 @@ class QuestionListView(ListView):
         return queryset
 
 class QuestionDetailView(DetailView):
-    template_name = 'detaileview.html'
+    template_name = 'detail.html'
 
     def get_queryset(self):
         return Question.objects.all()
+
+class QuestionUpdateView(UpdateView):
+    template_name = 'update.html'
+    model = Question
+    fields = ['title','content']
+    success_url = reverse_lazy('question:list')
+
+    def get_object(self, *args,**kwargs):
+        object = super(QuestionUpdateView,self).get_object(*args,**kwargs)
+        if object.created_by != self.request.user
+            raise Http404('Not allowed')
+        return object
 
 
 class AskQuestion(CreateView):

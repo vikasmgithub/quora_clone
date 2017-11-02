@@ -10,7 +10,7 @@
 {% for question in object_list %}
     <ul>
         <li>
-    {{ question.title }}
+   <a href="{% url 'question:detail' slug=question.slug %}">{{ question.title }}</a>
     {{ question.content }}
     </li>
     </ul>
