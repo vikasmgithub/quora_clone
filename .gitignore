@@ -156,6 +156,7 @@ venv.bak/
 # End of https://www.gitignore.io/api/python
 
 # DATABASE
+.idea
 db.sqlite3
 .idea/inspectionProfiles/
 .idea/misc.xml
