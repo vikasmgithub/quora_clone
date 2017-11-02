@@ -159,6 +159,7 @@ venv.bak/
 db.sqlite3
 .idea/inspectionProfiles/
 .idea/misc.xml
+.idea/workspace.xml
 .idea/modules.xml
 .idea/quora_clone.iml
 .idea/vcs.xml
