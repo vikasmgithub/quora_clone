@@ -8,12 +8,13 @@
 {% block content %}
     <div>
         {{ object.title }}
-    {{ object.content }}
+        {{ object.content }}
         <form action="" method="post">{% csrf_token %}
                 {{ answerform.as_p }}
             <input type="submit" value="answer" />
         </form>
     </div>
+    <a href="{% url 'question:detail' slug=question.slug   %}"></a>
     <a href="{% url 'question:update' slug=question.slug %}">edit</a>
     <div>
         {% for answer in answer_list %}
@@ -24,5 +25,8 @@
             </ul>
 
         {% endfor %}
+    <div>
+        <a href="{% url 'question:like' pk=question.id %}">like</a>
+    </div>
     </div>
 {% endblock content %}

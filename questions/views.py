@@ -1,18 +1,13 @@
 from django.views.generic.list import ListView
 from django.views.generic.detail import DetailView
 from django.views.generic.edit import CreateView,UpdateView
-from .models import Question,Answer
+from .models import Question,Answer,Vote
 from django.http import Http404
 from django.core.urlresolvers import reverse_lazy
 from .forms import AnswerForm
 from django.views.generic.edit import FormMixin
-# from django.views.generic.base import TemplateView
-
+from django.http import HttpResponse
 from django.shortcuts import get_object_or_404
-
-
-# class IndexView(TemplateView):
-#     template_name = 'index.html'
 
 
 class QuestionListView(ListView):
@@ -22,8 +17,6 @@ class QuestionListView(ListView):
     def get_queryset(self):
         queryset = Question.objects.all()
         return queryset
-
-
     # def get_context_data(self, **kwargs):
     #     context = super(QuestionListView,self).get_context_data(**kwargs)
     #     context['answerform'] = AnswerForm
@@ -32,10 +25,17 @@ class QuestionListView(ListView):
     #     return context
 
 
+
+
 class QuestionDetailView(FormMixin,DetailView):
     template_name = 'detail.html'
     form_class = AnswerForm
     model = Question
+
+    def vote(self):
+        upvote_count = Vote.upvote
+        down_vote = Vote.downvote
+
 
     def get_success_url(self):
         return reverse_lazy('question:detail', kwargs={'slug': self.object.slug})
@@ -66,6 +66,9 @@ class QuestionDetailView(FormMixin,DetailView):
 
 
 
+
+
+
 class QuestionUpdateView(UpdateView):
     template_name = 'update.html'
     model = Question
@@ -77,6 +80,8 @@ class QuestionUpdateView(UpdateView):
         if object.created_by != self.request.user:
             raise Http404('Not allowed')
         return object
+
+
 
 
 class AskQuestion(CreateView):
@@ -103,4 +108,8 @@ class AskQuestion(CreateView):
 #     #     context['question'] = qs[0].content
 
 
-
+def like(request,pk):
+    new_vote, created = Vote.objects.get_or_create(user=request.user, question_id=pk)
+    obj = get_object_or_404(Question,id=pk)
+    slug = obj.slug
+    return HttpResponse(reverse_lazy('question:detail'  , kwargs={'slug':slug}))
