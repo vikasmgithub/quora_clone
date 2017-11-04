@@ -12,6 +12,18 @@
         <li>
    <a href="{% url 'question:detail' slug=question.slug %}">{{ question.title }}</a>
     {{ question.content }}
+            <div>
+                <a href="{% url 'question:detail' slug=question.slug %}">Answer</a>
+            </div>
+            <div>
+{#                {% for answer in answer_list %}#}
+{#                <ul>#}
+{#                    <li>#}
+{#                        {{ answer.answer }}#}
+{#                    </li>#}
+{#                </ul>#}
+{#                    {% endfor %}#}
+            </div>
     </li>
     </ul>
 {% endfor %}

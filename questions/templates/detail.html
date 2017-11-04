@@ -9,6 +9,20 @@
     <div>
         {{ object.title }}
     {{ object.content }}
+        <form action="" method="post">{% csrf_token %}
+                {{ answerform.as_p }}
+            <input type="submit" value="answer" />
+        </form>
     </div>
     <a href="{% url 'question:update' slug=question.slug %}">edit</a>
+    <div>
+        {% for answer in answer_list %}
+            <ul>
+            <li>
+                {{ answer.answer }}
+            </li>
+            </ul>
+
+        {% endfor %}
+    </div>
 {% endblock content %}
