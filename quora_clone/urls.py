@@ -16,20 +16,17 @@ Including another URLconf
 from django.conf.urls import url
 from django.conf.urls import url,include
 from django.contrib import admin
-
-
-
 from django.contrib.auth import views as auth_views
 from questions import urls as questionurl
 from .views import Home
 from user import urls as userurl
+from django.views import generic
 
 urlpatterns = [
     url(r'^admin/', admin.site.urls),
-    url(r'^$', Home.as_view(), name = 'home'),
-    url('^', include('django.contrib.auth.urls')),
-    # url(r'^logout/$', auth_views.logout, name='logout'),
     url(r'^question/', include(questionurl, namespace='question')),
     url(r'^user/', include(userurl, namespace='user')),
+    # url(r'^l/$', Home,   name='list'),
+    url(r'^test/$', generic.TemplateView.as_view(template_name='base.html'), name="test"),
 
 ]

@@ -1,0 +1,21 @@
+{% extends 'base.html' %}
+
+{% block head_title %}
+    Feed
+{% endblock %}
+
+{% block content %}
+    <div class="col-md-10">
+        <ul class="list-group">
+            {% for object in object_list %}
+                <li class="list-group-item">
+                    <a href="{% url 'question:detail' slug=object.slug%}">{{ object.title }}</a>
+                    <div class="pull-right">
+                        {{ object.created_by }} asked at {{ object.create_date | date }}
+                    </div>
+                </li>
+            {% endfor %}
+
+        </ul>
+    </div>
+{% endblock %}

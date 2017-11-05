@@ -1,16 +1,17 @@
 from django.views.generic.list import ListView
 from django.views.generic.detail import DetailView
 from django.views.generic.edit import CreateView,UpdateView
+from django.contrib.auth.mixins import LoginRequiredMixin
 from .models import Question,Answer,Vote
 from django.http import Http404
 from django.core.urlresolvers import reverse_lazy
 from .forms import AnswerForm
 from django.views.generic.edit import FormMixin
-from django.http import HttpResponse
-from django.shortcuts import get_object_or_404
+from django.shortcuts import get_object_or_404,redirect
 
 
-class QuestionListView(ListView):
+class QuestionListView(LoginRequiredMixin,ListView):
+    login_url = reverse_lazy('user:login')
     template_name = 'listview.html'
     success_url = reverse_lazy('question:list')
 
@@ -27,14 +28,12 @@ class QuestionListView(ListView):
 
 
 
-class QuestionDetailView(FormMixin,DetailView):
+class QuestionDetailView(LoginRequiredMixin,FormMixin,DetailView):
+    login_url = reverse_lazy('user:login')
     template_name = 'detail.html'
     form_class = AnswerForm
     model = Question
 
-    def vote(self):
-        upvote_count = Vote.upvote
-        down_vote = Vote.downvote
 
 
     def get_success_url(self):
@@ -46,7 +45,10 @@ class QuestionDetailView(FormMixin,DetailView):
         context['answerform'] = AnswerForm(initial={'question': self.object, 'answered_by': self.request.user})
         # obj = get_object_or_404(Question,slug=self.kwargs['slug'])
         context['answer_list'] = Answer.objects.filter(question=self.object).order_by('create_date')
+        obj = Question.objects.get(slug=self.kwargs.get('slug'))
+        number_of_likes = obj.vote_set.all().count
         # context['answer_list'] = obj.to_answer_set.all()
+        context['number_of_likes'] = number_of_likes
         return context
 
     def post(self, request, *args, **kwargs):
@@ -69,7 +71,7 @@ class QuestionDetailView(FormMixin,DetailView):
 
 
 
-class QuestionUpdateView(UpdateView):
+class QuestionUpdateView(LoginRequiredMixin,UpdateView):
     template_name = 'update.html'
     model = Question
     fields = ['title','content']
@@ -84,7 +86,8 @@ class QuestionUpdateView(UpdateView):
 
 
 
-class AskQuestion(CreateView):
+class AskQuestion(LoginRequiredMixin,CreateView):
+    login_url = reverse_lazy('user:login')
     template_name = 'question.html'
     model = Question
     success_url = reverse_lazy('question:list')
@@ -112,4 +115,8 @@ def like(request,pk):
     new_vote, created = Vote.objects.get_or_create(user=request.user, question_id=pk)
     obj = get_object_or_404(Question,id=pk)
     slug = obj.slug
-    return HttpResponse(reverse_lazy('question:detail'  , kwargs={'slug':slug}))
+    if not created:
+        new_vote.delete()
+    else:
+        pass
+    return redirect(reverse_lazy('question:detail'  , kwargs={'slug':slug}))
